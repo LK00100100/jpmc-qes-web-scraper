@@ -3,6 +3,8 @@
 Clicks through a website then gets data from it.
 
 You may need this chrome driver to open chrome.
+Make sure your chromedriver is not a higher version than
+your version of chrome.
 It will complain that you need this if you don't have it.
 https://chromedriver.chromium.org/downloads
 
