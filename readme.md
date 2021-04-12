@@ -1,5 +1,7 @@
 # JPMC Qes Report Web Scraper
 
+Clicks through a website then gets data from it.
+
 You may need this chrome driver to open chrome.
 It will complain that you need this if you don't have it.
 https://chromedriver.chromium.org/downloads

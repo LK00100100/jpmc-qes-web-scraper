@@ -1,7 +1,8 @@
 from time import sleep
-from typing import Callable
+from typing import Callable, List
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
@@ -13,7 +14,7 @@ from qes_report import QesReportTableNames, QesReport
 landing_page_url = "https://www.jpmorganindices.com/indices/landing"
 
 
-def get_qes_report_elements(browser: WebDriver):
+def get_qes_report_elements(browser: WebDriver) -> List[WebElement]:
     """
     Gets the list of Position Report Elements such as:
     09 Apr 2021 Position Report.html.
@@ -37,22 +38,22 @@ def go_from_landing_page_to_qes_reports_page(browser: WebDriver):
     select_location_btn = browser.find_element_by_link_text("Select Location")
     select_location_btn.click()
 
-    sleep(0.5)
+    sleep(1)
 
     non_us_btn = browser.find_element_by_class_name("nonus")
     non_us_btn.click()
 
-    sleep(0.5)
+    sleep(1)
 
     select_profile_btn = browser.find_element_by_link_text("Select Profile")
     select_profile_btn.click()
 
-    sleep(0.5)
+    sleep(1)
 
     professional_investor_btn = browser.find_element_by_link_text("Professional Investor")
     professional_investor_btn.click()
 
-    sleep(0.5)
+    sleep(1)
 
     accept_btn = browser.find_element_by_xpath("//input[@aria-label='Accept']")
     accept_btn.click()
@@ -82,7 +83,7 @@ def go_from_landing_page_to_qes_reports_page(browser: WebDriver):
 
     attempt_func_num_times(click_reports_btn, 5)
 
-    sleep(0.5)
+    sleep(1)
 
 
 def attempt_func_num_times(the_func: Callable, max_attempts: int):
@@ -95,7 +96,7 @@ def attempt_func_num_times(the_func: Callable, max_attempts: int):
     """
     for attempt_num in range(max_attempts):
         try:
-            sleep(2)
+            sleep(2)  # note: lowering this causes errors
 
             the_func()
         except Exception as ex:
@@ -105,7 +106,7 @@ def attempt_func_num_times(the_func: Callable, max_attempts: int):
         break
 
 
-def get_info_from_positon_report(browser: WebDriver, position_elem: WebElement):
+def get_info_from_positon_report(browser: WebDriver, position_elem: WebElement) -> QesReport:
     """
     will click into the position_elem, and get the desired info.
     :param browser:
@@ -113,7 +114,7 @@ def get_info_from_positon_report(browser: WebDriver, position_elem: WebElement):
     text like "09 Apr 2021 Position Report.html"
     :return: QesReport
     """
-    position_elem.click()
+    position_elem.click()  # opens a new tab.
 
     sleep(1)
 
@@ -152,7 +153,7 @@ def get_info_from_positon_report(browser: WebDriver, position_elem: WebElement):
     return qes_report
 
 
-def parse_table(element: WebElement):
+def parse_table(element: WebElement) -> List[List[str]]:
     """
     reads a table WebElement and crams it into a 2d array.
     :param element:
@@ -185,17 +186,29 @@ def parse_table(element: WebElement):
 
 
 if __name__ == "__main__":
-    the_browser = webdriver.Chrome()
+
+    # this hides the browser
+    options = Options()
+    options.add_argument('--headless')
+
+    the_browser = webdriver.Chrome(options=options)
+
+    # note: this breaks the program for some reason
+    # the_browser.minimize_window()
 
     reports_elements = get_qes_report_elements(the_browser)
 
-    # lists all of the dd MMM yyy Position Report.html
+    print("listing all dd MMM yyy Position Report.html...")
     for reports_element in reports_elements:
         print(reports_element.text)
+
+    print("\n")
 
     latest_report_elem = reports_elements[0]
     the_qes_report = get_info_from_positon_report(the_browser, latest_report_elem)
 
+    print("\nPrinting QES Report...")
+
     print(the_qes_report)
 
-    the_browser.close()
+    the_browser.quit()
