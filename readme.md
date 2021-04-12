@@ -23,3 +23,6 @@ pip install -r requirements.txt
 ```
 python main.py
 ```
+
+You can remove the "headless" options if you want to see
+the browser. This is in the section in the bottom of main.
