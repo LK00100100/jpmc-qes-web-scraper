@@ -162,6 +162,8 @@ def get_info_from_position_report(browser: WebDriver, position_elem: WebElement)
 
         if QesReportTableNames.daily_performance.value in element.text:
             next_table_name = QesReportTableNames.daily_performance
+        elif QesReportTableNames.intraday_activity.value in element.text:
+            next_table_name = QesReportTableNames.intraday_activity
         elif QesReportTableNames.strategy_detail.value in element.text:
             next_table_name = QesReportTableNames.strategy_detail
         elif QesReportTableNames.indicative_next_day.value in element.text:
@@ -173,6 +175,8 @@ def get_info_from_position_report(browser: WebDriver, position_elem: WebElement)
 
             if next_table_name == QesReportTableNames.daily_performance:
                 a_qes_report.daily_performance_table = table_array
+            elif next_table_name == QesReportTableNames.intraday_activity:
+                a_qes_report.intraday_activity_table = table_array
             elif next_table_name == QesReportTableNames.strategy_detail:
                 a_qes_report.strategy_detail_table = table_array
             elif next_table_name == QesReportTableNames.indicative_next_day:
@@ -233,6 +237,9 @@ if __name__ == "__main__":
 
     the_browser.quit()
 
+    target_folder_path = "./"
+
     print("listing all dd MMM yyy Position Report.html... and saving as files")
     for qes_report in qes_report_list:
-        print(qes_report.report_name)
+        print("saving:", qes_report.report_name)
+        print(qes_report.save_to_location(target_folder_path))
