@@ -16,6 +16,7 @@ class TestQesReport(TestCase):
 
     def test_save_to_location(self):
         qes_report = QesReport()
+        qes_report.report_name = "some test.html"
         qes_report.daily_performance_table = [["a", "b"], ["1", "2"]]
         qes_report.intraday_activity_table = [["c", "d"], ["3", "4"]]
         qes_report.strategy_detail_table = [["e", "f"], ["5", "6"]]
