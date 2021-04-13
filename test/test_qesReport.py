@@ -15,4 +15,11 @@ class TestQesReport(TestCase):
         self.assertEqual(expected, the_str)
 
     def test_save_to_location(self):
-        pass
+        qes_report = QesReport()
+        qes_report.daily_performance_table = [["a", "b"], ["1", "2"]]
+        qes_report.intraday_activity_table = [["c", "d"], ["3", "4"]]
+        qes_report.strategy_detail_table = [["e", "f"], ["5", "6"]]
+        qes_report.indicative_next_day_table = [["g", "h"], ["7", "8"]]
+
+        folder_path = "../output"
+        qes_report.save_to_location(folder_path)

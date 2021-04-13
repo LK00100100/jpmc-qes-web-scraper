@@ -2,6 +2,7 @@ from enum import Enum
 from typing import List
 from io import StringIO
 import csv
+import os
 
 
 class QesReport:
@@ -34,33 +35,41 @@ class QesReport:
         output += QesReport.get_2d_table_csv_str(self.indicative_next_day_table)
         return output
 
-    def save_to_location(self, save_to_folder):
+    def save_to_location(self, folder_path):
         """
         saves a file for each report in a standard csv.
-        :param save_to_folder: folder path
+        :param folder_path:
         :return:
         """
 
         if self.daily_performance_table is not None:
-            file = open("{}-{}.csv".format(self.report_name, "daily_performance"), "w")
+            file_name = "{}-{}.csv".format(self.report_name, "daily_performance")
+            file_path = os.path.join(folder_path, file_name)
+            file = open(file_path, "w")
             output_str = QesReport.get_2d_table_csv_str(self.daily_performance_table)
             file.write(output_str)
             file.close()
 
         if self.intraday_activity_table is not None:
-            file = open("{}-{}.csv".format(self.report_name, "intraday_activity"), "w")
+            file_name = "{}-{}.csv".format(self.report_name, "intraday_activity")
+            file_path = os.path.join(folder_path, file_name)
+            file = open(file_path, "w")
             output_str = QesReport.get_2d_table_csv_str(self.intraday_activity_table)
             file.write(output_str)
             file.close()
 
         if self.strategy_detail_table is not None:
-            file = open("{}-{}.csv".format(self.report_name, "strategy_detail"), "w")
+            file_name = "{}-{}.csv".format(self.report_name, "strategy_detail")
+            file_path = os.path.join(folder_path, file_name)
+            file = open(file_path, "w")
             output_str = QesReport.get_2d_table_csv_str(self.strategy_detail_table)
             file.write(output_str)
             file.close()
 
         if self.indicative_next_day_table is not None:
-            file = open("{}-{}.csv".format(self.report_name, "indicative_next_day"), "w")
+            file_name = "{}-{}.csv".format(self.report_name, "indicative_next_day")
+            file_path = os.path.join(folder_path, file_name)
+            file = open(file_path, "w")
             output_str = QesReport.get_2d_table_csv_str(self.indicative_next_day_table)
             file.write(output_str)
             file.close()
