@@ -38,6 +38,7 @@ class QesReport:
     def save_to_location(self, folder_path):
         """
         saves a file for each report in a standard csv.
+        If one of the reports is none, it will skip that one report.
         :param folder_path:
         :return:
         """
@@ -78,7 +79,8 @@ class QesReport:
     def get_2d_table_csv_str(array2d: List[List[str]]):
         """
         Prints a csv string of a 2d str array.
-        Accounts for commas and quotes
+        Accounts for commas and quotes.
+
         :param array2d:
         :return:
         """
@@ -87,7 +89,10 @@ class QesReport:
             line = StringIO()
             writer = csv.writer(line)
             writer.writerow(row)
-            csv_str = line.getvalue()
+            # rstrips the /r/n (double new line in file)
+            # the last value could be spaces, which will be stripped.
+            # but for this job, it wouldn't matter
+            csv_str = line.getvalue().rstrip() + "\n"
             answer += csv_str  # ends with new line
 
         return answer

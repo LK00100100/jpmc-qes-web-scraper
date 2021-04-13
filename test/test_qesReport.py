@@ -10,8 +10,8 @@ class TestQesReport(TestCase):
 
         the_str = QesReport.get_2d_table_csv_str(table)
 
-        expected = 'a,"""",",",b\r\n'
-        expected += "1,2,3,4\r\n"
+        expected = 'a,"""",",",b\n'
+        expected += "1,2,3,4\n"
         self.assertEqual(expected, the_str)
 
     def test_save_to_location(self):

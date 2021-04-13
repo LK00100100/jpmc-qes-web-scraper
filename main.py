@@ -237,7 +237,7 @@ if __name__ == "__main__":
 
     the_browser.quit()
 
-    target_folder_path = "./"
+    target_folder_path = "./output"
 
     print("listing all dd MMM yyy Position Report.html... and saving as files")
     for qes_report in qes_report_list:
