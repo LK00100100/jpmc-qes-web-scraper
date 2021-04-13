@@ -43,7 +43,7 @@ class QesReport:
         :return:
         """
 
-        if self.daily_performance_table is not None:
+        if len(self.daily_performance_table) != 0:
             file_name = "{}-{}.csv".format(self.report_name, "daily_performance")
             file_path = os.path.join(folder_path, file_name)
             file = open(file_path, "w")
@@ -51,7 +51,7 @@ class QesReport:
             file.write(output_str)
             file.close()
 
-        if self.intraday_activity_table is not None:
+        if len(self.intraday_activity_table) != 0:
             file_name = "{}-{}.csv".format(self.report_name, "intraday_activity")
             file_path = os.path.join(folder_path, file_name)
             file = open(file_path, "w")
@@ -59,7 +59,7 @@ class QesReport:
             file.write(output_str)
             file.close()
 
-        if self.strategy_detail_table is not None:
+        if len(self.strategy_detail_table) != 0:
             file_name = "{}-{}.csv".format(self.report_name, "strategy_detail")
             file_path = os.path.join(folder_path, file_name)
             file = open(file_path, "w")
@@ -67,7 +67,7 @@ class QesReport:
             file.write(output_str)
             file.close()
 
-        if self.indicative_next_day_table is not None:
+        if len(self.indicative_next_day_table) != 0:
             file_name = "{}-{}.csv".format(self.report_name, "indicative_next_day")
             file_path = os.path.join(folder_path, file_name)
             file = open(file_path, "w")

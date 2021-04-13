@@ -242,4 +242,4 @@ if __name__ == "__main__":
     print("listing all dd MMM yyy Position Report.html... and saving as files")
     for qes_report in qes_report_list:
         print("saving:", qes_report.report_name)
-        print(qes_report.save_to_location(target_folder_path))
+        qes_report.save_to_location(target_folder_path)
