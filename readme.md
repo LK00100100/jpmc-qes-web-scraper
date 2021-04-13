@@ -29,3 +29,8 @@ the browser. This is in the section in the bottom of main.
 
 You may have to adjust the various sleep and other timings if 
 your internet is slow and you are getting timeout errors.
+Maybe a variable can be set to replace some hard-coded timing numbers.
+
+This program is likely to break if the website changes
+too much. I recommend spot-checking the results.
+

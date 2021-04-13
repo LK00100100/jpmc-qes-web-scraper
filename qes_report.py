@@ -4,10 +4,13 @@ from typing import List
 
 class QesReport:
     """
-    Holds 2d arrays of tables
+    Holds one QesReport.
+    Has 2d arrays of tables
     """
 
     def __init__(self):
+        self.report_name = None
+
         # these are just 2d arrays of the table.
         # 0th row is the header, the rest are data rows.
         self.daily_performance_table = []
@@ -27,6 +30,7 @@ class QesReport:
 
     @staticmethod
     def _get_2d_table_str(array2d: List[List[str]]):
+        # TODO fix CSV string
         answer = ""
         for row in array2d:
             answer += ",".join(row) + "\n"
